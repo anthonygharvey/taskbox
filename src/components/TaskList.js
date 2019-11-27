@@ -81,5 +81,3 @@ export default connect(
     onPinTask: id => dispatch(pinTask(id)),
   })
 )(PureTaskList);
-
-// export default TaskList;
