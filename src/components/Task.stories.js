@@ -20,6 +20,20 @@ export const actions = {
 const longTitle =
   "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem tempore quo saepe numquam nulla quidem, sit perferendis, nam laboriosam neque facere libero pariatur veniam illum cumque optio consequatur laborum dolor!";
 
+function randomTitle() {
+  const titleLength = Math.floor(Math.random() * 150) + 1;
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789";
+  var charactersLength = characters.length;
+
+  for (var i = 0; i < titleLength; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  return result;
+}
+
 storiesOf("Task", module)
   .addDecorator(withKnobs)
   .add("default", () => (
@@ -33,4 +47,7 @@ storiesOf("Task", module)
   ))
   .add("long_title", () => (
     <Task task={{ ...task, title: longTitle }} {...actions} />
+  ))
+  .add("random_title_length", () => (
+    <Task task={{ ...task, title: randomTitle() }} {...actions} />
   ));
