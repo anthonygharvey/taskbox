@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs, object } from "@storybook/addon-knobs/react";
 
 import Task from "./Task";
 
@@ -16,11 +17,20 @@ export const actions = {
   onArchiveTask: action("onArchiveTask"),
 };
 
+const longTitle =
+  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem tempore quo saepe numquam nulla quidem, sit perferendis, nam laboriosam neque facere libero pariatur veniam illum cumque optio consequatur laborum dolor!";
+
 storiesOf("Task", module)
-  .add("default", () => <Task task={task} {...actions} />)
+  .addDecorator(withKnobs)
+  .add("default", () => (
+    <Task task={object("task", { ...task })} {...actions} />
+  ))
   .add("pinned", () => (
     <Task task={{ ...task, state: "TASK_PINNED" }} {...actions} />
   ))
   .add("archived", () => (
     <Task task={{ ...task, state: "TASK_ARCHIVED" }} {...actions} />
+  ))
+  .add("long_title", () => (
+    <Task task={{ ...task, title: longTitle }} {...actions} />
   ));
